@@ -1,0 +1,49 @@
+body {
+  font-family: Arial;
+  background: #1c1c1c;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  padding: 15px 30px;
+  margin: 10px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.true { background: #4caf50; color: white; }
+.false { background: #f44336; color: white; }
+
+.screen {
+  padding-top: 100px;
+}
+
+.hidden {
+  display: none;
+}
+
+.hud {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+#timerBar {
+  width: 60%;
+  height: 20px;
+  background: #444;
+  margin: 20px auto;
+  border-radius: 10px;
+}
+
+#timerFill {
+  height: 100%;
+  width: 100%;
+  background: #00e6ff;
+  border-radius: 10px;
+  transition: width 0.1s linear;
+}
