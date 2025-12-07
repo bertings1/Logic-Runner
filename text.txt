@@ -1,0 +1,15 @@
+
+## 👥 Team Members
+[Your Names Here]
+
+## 📚 Course
+MS 101 - Discrete Mathematics
+College of Information Technology
+A.Y 2025-2026
+
+## 📝 How to Use in Your Project
+1. Fork this repository to your GitHub account
+2. Customize the README with your group details
+3. Modify game levels if needed
+4. Add your names to the game header
+5. Deploy using GitHub Pages for easy sharing
