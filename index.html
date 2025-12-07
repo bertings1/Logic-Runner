@@ -3,76 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logic Quest: The Truth Seeker</title>
+    <title>Logic Runner | Propositional Logic Game</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="game-container">
-        <!-- Header -->
-        <header class="game-header">
-            <h1><i class="fas fa-brain"></i> Logic Quest</h1>
-            <div class="player-stats">
-                <div class="stat">Level: <span id="level">1</span></div>
-                <div class="stat">Score: <span id="score">0</span></div>
-                <div class="stat">Lives: <span id="lives">3</span></div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-brain-circuit"></i>
+            <span>LogicRunner</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link active"><i class="fas fa-gamepad"></i> Game</a>
+            <a href="#" class="nav-link"><i class="fas fa-book"></i> Learn</a>
+            <a href="#" class="nav-link"><i class="fas fa-chart-line"></i> Progress</a>
+        </div>
+        <div class="nav-user">
+            <div class="user-badge">
+                <i class="fas fa-user"></i>
+                <span>Player</span>
             </div>
-        </header>
+        </div>
+    </nav>
 
-        <!-- Main Game Area -->
-        <main class="game-area">
-            <div class="level-intro">
-                <h2 id="level-title">Level 1: Proposition Match</h2>
-                <p id="level-description">Match the logical operators with their symbols!</p>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Left Panel - Game Controls -->
+        <div class="left-panel">
+            <div class="panel-card">
+                <h3><i class="fas fa-cogs"></i> Game Settings</h3>
+                
+                <div class="control-group">
+                    <label class="control-label">VOICE GUIDE</label>
+                    <div class="voice-selector">
+                        <div class="voice-option active" data-voice="nova">
+                            <i class="fas fa-robot"></i>
+                            <span>Nova</span>
+                        </div>
+                        <div class="voice-option" data-voice="sage">
+                            <i class="fas fa-hat-wizard"></i>
+                            <span>Sage</span>
+                        </div>
+                        <div class="voice-option" data-voice="echo">
+                            <i class="fas fa-bolt"></i>
+                            <span>Echo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">VIBE</label>
+                    <div class="vibe-selector">
+                        <div class="vibe-option active">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Patient Teacher</span>
+                        </div>
+                        <div class="vibe-option">
+                            <i class="fas fa-robot"></i>
+                            <span>AI Assistant</span>
+                        </div>
+                        <div class="vibe-option">
+                            <i class="fas fa-crown"></i>
+                            <span>Logic Knight</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">DIFFICULTY</label>
+                    <div class="difficulty-slider">
+                        <div class="slider-track">
+                            <div class="slider-fill"></div>
+                            <div class="slider-handle" style="left: 25%;"></div>
+                        </div>
+                        <div class="slider-labels">
+                            <span>Beginner</span>
+                            <span>Intermediate</span>
+                            <span>Advanced</span>
+                            <span>Expert</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-panel">
+                    <div class="stat-item">
+                        <div class="stat-label">Current Streak</div>
+                        <div class="stat-value">5</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Accuracy</div>
+                        <div class="stat-value">87%</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Time</div>
+                        <div class="stat-value" id="timer">02:45</div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Game Content changes based on level -->
-            <div id="game-content">
-                <!-- Content loaded by JavaScript -->
+            <div class="panel-card logic-reference">
+                <h3><i class="fas fa-book-open"></i> Logic Reference</h3>
+                <div class="reference-grid">
+                    <div class="logic-card">
+                        <div class="logic-symbol">∧</div>
+                        <div class="logic-name">AND</div>
+                        <div class="logic-desc">Both must be true</div>
+                    </div>
+                    <div class="logic-card">
+                        <div class="logic-symbol">∨</div>
+                        <div class="logic-name">OR</div>
+                        <div class="logic-desc">At least one true</div>
+                    </div>
+                    <div class="logic-card">
+                        <div class="logic-symbol">¬</div>
+                        <div class="logic-name">NOT</div>
+                        <div class="logic-desc">Opposite value</div>
+                    </div>
+                    <div class="logic-card">
+                        <div class="logic-symbol">→</div>
+                        <div class="logic-name">IMPLIES</div>
+                        <div class="logic-desc">If p then q</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Panel - Game Area -->
+        <div class="center-panel">
+            <div class="game-header">
+                <div class="level-indicator">
+                    <div class="level-badge">
+                        <i class="fas fa-layer-group"></i>
+                        <span>LEVEL <span id="current-level">1</span>/4</span>
+                    </div>
+                    <div class="xp-bar">
+                        <div class="xp-fill" style="width: 25%;"></div>
+                    </div>
+                </div>
+                
+                <div class="player-score">
+                    <div class="score-display">
+                        <i class="fas fa-star"></i>
+                        <span id="score-value">0</span> points
+                    </div>
+                    <div class="lives-display">
+                        <i class="fas fa-heart"></i>
+                        <span id="lives-value">3</span> lives
+                    </div>
+                </div>
             </div>
 
-            <!-- Controls -->
-            <div class="controls">
-                <button id="hint-btn" class="btn hint-btn">
-                    <i class="fas fa-lightbulb"></i> Hint
-                </button>
-                <button id="submit-btn" class="btn submit-btn">
-                    Check Answer <i class="fas fa-check"></i>
-                </button>
-                <button id="next-btn" class="btn next-btn" disabled>
-                    Next Level <i class="fas fa-arrow-right"></i>
-                </button>
+            <div class="game-card">
+                <div class="game-title-section">
+                    <h2 id="level-title">Level 1: Proposition Match</h2>
+                    <p id="level-description" class="game-subtitle">Match logical operators with their correct symbols to build your logical foundation</p>
+                </div>
+
+                <!-- Game Content Area -->
+                <div id="game-content" class="game-content-area">
+                    <!-- Content will be loaded by JavaScript -->
+                    <div class="loading-state">
+                        <div class="loader"></div>
+                        <p>Loading game content...</p>
+                    </div>
+                </div>
+
+                <!-- Game Feedback -->
+                <div id="game-feedback" class="feedback-panel">
+                    <div class="feedback-header">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Logic Guide</span>
+                    </div>
+                    <div id="feedback-content" class="feedback-content">
+                        Welcome to Logic Runner! Let's start with basic proposition matching. Drag operators to their symbols.
+                    </div>
+                </div>
+
+                <!-- Game Controls -->
+                <div class="game-controls">
+                    <button id="hint-btn" class="control-btn hint-btn">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Get Hint</span>
+                    </button>
+                    <button id="check-btn" class="control-btn primary-btn">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Check Solution</span>
+                    </button>
+                    <button id="next-btn" class="control-btn next-btn" disabled>
+                        <i class="fas fa-arrow-right"></i>
+                        <span>Next Challenge</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel - Chat & Progress -->
+        <div class="right-panel">
+            <div class="panel-card">
+                <h3><i class="fas fa-comments"></i> Logic Assistant</h3>
+                <div class="chat-container">
+                    <div class="chat-message ai-message">
+                        <div class="message-avatar">AI</div>
+                        <div class="message-content">
+                            Hello! I'm your logic assistant. I'll help you understand propositional logic concepts as you play.
+                        </div>
+                    </div>
+                    <div class="chat-message user-message">
+                        <div class="message-avatar">You</div>
+                        <div class="message-content">
+                            Ready to learn some logic!
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="Ask about logic concepts...">
+                    <button class="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
             </div>
 
-            <!-- Feedback -->
-            <div id="feedback" class="feedback"></div>
-        </main>
-
-        <!-- Sidebar for reference -->
-        <aside class="reference-sidebar">
-            <h3><i class="fas fa-book"></i> Logic Reference</h3>
-            <div class="logic-table">
-                <table>
-                    <tr><th>Operator</th><th>Symbol</th><th>Meaning</th></tr>
-                    <tr><td>AND</td><td>∧</td><td>Both must be true</td></tr>
-                    <tr><td>OR</td><td>∨</td><td>At least one true</td></tr>
-                    <tr><td>NOT</td><td>¬</td><td>Opposite truth value</td></tr>
-                    <tr><td>IMPLIES</td><td>→</td><td>If p then q</td></tr>
-                </table>
+            <div class="panel-card progress-card">
+                <h3><i class="fas fa-chart-simple"></i> Progress</h3>
+                <div class="progress-item">
+                    <div class="progress-label">Proposition Match</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress-value">0%</div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">Truth Tables</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress-value">0%</div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">Logic Puzzles</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress-value">0%</div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">Equivalences</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress-value">0%</div>
+                </div>
             </div>
-            <div class="truth-table-preview">
-                <h4>Truth Table Example:</h4>
-                <p>p ∧ q = true only when both are true</p>
-            </div>
-        </aside>
+        </div>
     </div>
 
-    <!-- Modal for game completion -->
-    <div id="completion-modal" class="modal">
-        <div class="modal-content">
-            <h2>Level Complete! 🎉</h2>
-            <p id="completion-message"></p>
-            <button id="continue-btn" class="btn submit-btn">Continue</button>
+    <!-- Game Complete Modal -->
+    <div id="completion-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <i class="fas fa-trophy modal-icon"></i>
+                <h2>Level Complete!</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="score-breakdown">
+                    <div class="score-item">
+                        <div class="score-label">Accuracy</div>
+                        <div class="score-value">100%</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">Time Bonus</div>
+                        <div class="score-value">+50</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">Streak Bonus</div>
+                        <div class="score-value">+25</div>
+                    </div>
+                    <div class="score-item total">
+                        <div class="score-label">Total Score</div>
+                        <div class="score-value" id="final-score">175</div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="continue-game" class="modal-btn primary-btn">
+                        <i class="fas fa-play"></i>
+                        Continue Game
+                    </button>
+                    <button id="review-answers" class="modal-btn secondary-btn">
+                        <i class="fas fa-redo"></i>
+                        Review Answers
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
